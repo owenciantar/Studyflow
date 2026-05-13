@@ -103,7 +103,7 @@ def _build_panel(
     if droplets:
         lines.append(f"  {droplets}")
     for art_line in stage.art.splitlines():
-        lines.append(f"  {escape(art_line)}")
+        lines.append(f"  {art_line}")
     lines.append(f"  [dim]{stage.label}[/]")
     lines.append("")
 
@@ -203,7 +203,7 @@ def run_session(tag: str | None = None) -> None:
     console = Console()
     goal_hit_at: float | None = None
 
-    with Live(console=console, refresh_per_second=2, screen=False) as live:
+    with Live(console=console, refresh_per_second=2, screen=True) as live:
         while not stop_event.is_set():
             elapsed = time.monotonic() - start_mono
             today_total = base_today_secs + int(elapsed)

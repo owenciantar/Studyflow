@@ -10,6 +10,7 @@ from rich.console import Console
 from rich.markup import escape
 from rich.panel import Panel
 from rich.table import Table
+from rich.text import Text
 
 from studyflow import db, gamify, garden
 
@@ -157,7 +158,7 @@ def render_dashboard(console: Console) -> None:
         f"Next: [cyan]{nxt.label}[/] in {hours_left:.1f}h" if nxt and hours_left is not None
         else "[bold yellow]Maximum stage reached![/]"
     )
-    garden_markup = "\n".join(f"[green]{escape(line)}[/]" for line in stage.art.splitlines())
-    garden_markup += f"\n\n[bold green]{stage.label}[/]  ·  {progress_line}"
+    garden_content = Text("\n".join(stage.art.splitlines()), style="green")
+    garden_content.append_text(Text.from_markup(f"\n\n[bold green]{escape(stage.label)}[/]  ·  {progress_line}"))
 
-    console.print(Panel(garden_markup, title="[bold]Garden[/]", border_style="green"))
+    console.print(Panel(garden_content, title="[bold]Garden[/]", border_style="green"))

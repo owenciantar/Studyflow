@@ -9,6 +9,7 @@ import typer
 from rich.console import Console
 from rich.markup import escape
 from rich.panel import Panel
+from rich.text import Text
 
 from studyflow import db, garden
 
@@ -63,14 +64,16 @@ def show_garden() -> None:
     nxt = garden.next_stage(stage)
     hours_left = garden.hours_to_next_stage(lifetime_hours)
 
-    markup = "\n".join(f"[green]{escape(line)}[/]" for line in stage.art.splitlines())
-    markup += f"\n\n[bold green]{stage.label}[/]\n[dim]Lifetime hours: {lifetime_hours:.1f}h[/]\n"
+    art_lines = "\n".join(stage.art.splitlines())
+    info = f"\n\n[bold green]{escape(stage.label)}[/]\n[dim]Lifetime hours: {lifetime_hours:.1f}h[/]\n"
     if nxt and hours_left is not None:
-        markup += f"Next stage [cyan]{nxt.label}[/] in {hours_left:.1f}h"
+        info += f"Next stage [cyan]{escape(nxt.label)}[/] in {hours_left:.1f}h"
     else:
-        markup += "[bold yellow]You have reached the final garden stage![/]"
+        info += "[bold yellow]You have reached the final garden stage![/]"
 
-    console.print(Panel(markup, title="[bold green]Garden[/]", border_style="green"))
+    content = Text(art_lines, style="green")
+    content.append_text(Text.from_markup(info))
+    console.print(Panel(content, title="[bold green]Garden[/]", border_style="green"))
 
 
 # ---------------------------------------------------------------------------
