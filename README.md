@@ -1,6 +1,6 @@
 # studyflow
 
-A flowtime study timer with XP, streaks, and a growing ASCII garden. Runs entirely in the terminal.
+A CLI flowtime study timer with XP, streaks, and a growing ASCII garden. Runs entirely in the terminal.
 
 ## Install
 
