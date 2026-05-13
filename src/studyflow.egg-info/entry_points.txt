@@ -1,0 +1,2 @@
+[console_scripts]
+studyflow = studyflow.cli:app

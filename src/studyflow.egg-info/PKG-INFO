@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: studyflow
+Version: 0.1.0
+Summary: A flowtime study timer with gamification
+Requires-Python: >=3.11
+Requires-Dist: rich>=13.7
+Requires-Dist: typer>=0.12
+Requires-Dist: platformdirs>=4.2
